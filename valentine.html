@@ -140,6 +140,49 @@
             </div>
         </div>
 
+        <!-- Schedule a Date Section -->
+        <div class="detail-card schedule-card">
+            <h2>📅 Let's Schedule Our Date!</h2>
+            <p style="color: rgba(255,255,255,0.8); margin-bottom: 20px;">Pick a time that works for you 💕</p>
+            <div class="schedule-form">
+                <div class="form-group">
+                    <label>📆 Date</label>
+                    <input type="date" id="dateInput" class="schedule-input">
+                </div>
+                <div class="form-group">
+                    <label>⏰ Time</label>
+                    <input type="time" id="timeInput" class="schedule-input">
+                </div>
+                <div class="form-group">
+                    <label>🎯 Activity</label>
+                    <select id="activityInput" class="schedule-input">
+                        <option value="">Choose an activity...</option>
+                        <option value="coffee">☕ Coffee Date</option>
+                        <option value="dinner">🍝 Romantic Dinner</option>
+                        <option value="movie">🎬 Movie Night</option>
+                        <option value="walk">🌅 Evening Walk</option>
+                        <option value="picnic">🧺 Park Picnic</option>
+                        <option value="surprise">🎁 Surprise Me!</option>
+                    </select>
+                </div>
+                <button onclick="scheduleDate()" class="schedule-btn">💌 Send Date Request</button>
+                <div id="scheduleConfirm" class="schedule-confirm" style="display: none;"></div>
+            </div>
+        </div>
+
+        <!-- Love Quiz Section -->
+        <div class="detail-card quiz-card">
+            <h2>💝 Quick Love Quiz</h2>
+            <p style="color: rgba(255,255,255,0.8); margin-bottom: 20px;">What's your ideal date vibe?</p>
+            <div class="quiz-options">
+                <button class="quiz-option" onclick="selectQuiz(this, 'adventurous')">🎢 Adventurous & Fun</button>
+                <button class="quiz-option" onclick="selectQuiz(this, 'romantic')">🌹 Romantic & Cozy</button>
+                <button class="quiz-option" onclick="selectQuiz(this, 'chill')">🎮 Chill & Relaxed</button>
+                <button class="quiz-option" onclick="selectQuiz(this, 'foodie')">🍕 Foodie Adventures</button>
+            </div>
+            <div id="quizResult" class="quiz-result" style="display: none;"></div>
+        </div>
+
         <div class="detail-card">
             <h2>💬 Let's Connect!</h2>
             <a href="https://www.instagram.com/hiranandanilakshya2" target="_blank" class="instagram-btn">

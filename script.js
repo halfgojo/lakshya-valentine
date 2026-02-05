@@ -36,6 +36,9 @@ let isPlaying = false;
 const bgMusic = document.getElementById('bgMusic');
 const musicBtn = document.getElementById('musicToggle');
 
+// Set volume to 30% (softer)
+bgMusic.volume = 0.3;
+
 function toggleMusic() {
     if (isPlaying) {
         bgMusic.pause();
@@ -340,3 +343,132 @@ function displayDistanceResult(distance) {
         messageDiv.textContent = "Distance is just a number! 💕 Let's video call first? 📱❤️";
     }
 }
+
+// ===== SCHEDULE A DATE =====
+function scheduleDate() {
+    const dateInput = document.getElementById('dateInput').value;
+    const timeInput = document.getElementById('timeInput').value;
+    const activityInput = document.getElementById('activityInput').value;
+    const confirmDiv = document.getElementById('scheduleConfirm');
+
+    if (!dateInput || !timeInput || !activityInput) {
+        confirmDiv.style.display = 'block';
+        confirmDiv.style.background = 'rgba(255, 77, 77, 0.2)';
+        confirmDiv.style.color = '#ff4d4d';
+        confirmDiv.style.borderColor = 'rgba(255, 77, 77, 0.5)';
+        confirmDiv.textContent = '⚠️ Please fill in all fields!';
+        return;
+    }
+
+    const activityNames = {
+        'coffee': '☕ Coffee Date',
+        'dinner': '🍝 Romantic Dinner',
+        'movie': '🎬 Movie Night',
+        'walk': '🌅 Evening Walk',
+        'picnic': '🧺 Park Picnic',
+        'surprise': '🎁 Surprise Date'
+    };
+
+    const formattedDate = new Date(dateInput).toLocaleDateString('en-US', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    });
+
+    confirmDiv.style.display = 'block';
+    confirmDiv.style.background = 'rgba(76, 209, 55, 0.2)';
+    confirmDiv.style.color = '#4cd137';
+    confirmDiv.style.borderColor = 'rgba(76, 209, 55, 0.5)';
+    confirmDiv.innerHTML = `✅ Date request sent! 💕<br><strong>${activityNames[activityInput]}</strong><br>${formattedDate} at ${timeInput}<br><em>Lakshya will confirm soon! 💌</em>`;
+
+    // Trigger mini confetti
+    if (typeof confetti !== 'undefined') {
+        confetti({ particleCount: 30, spread: 60, origin: { y: 0.8 } });
+    }
+}
+
+// ===== LOVE QUIZ =====
+function selectQuiz(button, choice) {
+    // Remove selected class from all options
+    document.querySelectorAll('.quiz-option').forEach(opt => opt.classList.remove('selected'));
+
+    // Add selected class to clicked option
+    button.classList.add('selected');
+
+    const results = {
+        'adventurous': {
+            title: '🎢 Adventure Seeker!',
+            message: 'You love thrill and excitement! How about a road trip or amusement park date?'
+        },
+        'romantic': {
+            title: '🌹 Hopeless Romantic!',
+            message: 'Candlelit dinners and sunset walks are your thing! Let\'s plan something magical!'
+        },
+        'chill': {
+            title: '🎮 Chill Vibes Only!',
+            message: 'Netflix, gaming, or just hanging out - sounds perfect! No pressure, just us!'
+        },
+        'foodie': {
+            title: '🍕 Food is Love!',
+            message: 'The way to your heart is through your stomach! Let\'s explore all the best cafés!'
+        }
+    };
+
+    const resultDiv = document.getElementById('quizResult');
+    resultDiv.style.display = 'block';
+    resultDiv.innerHTML = `<h3>${results[choice].title}</h3><p>${results[choice].message}</p>`;
+}
+
+// ===== MOBILE TOUCH EFFECTS =====
+// Touch move creates sparkles on mobile
+document.addEventListener('touchmove', (e) => {
+    const touch = e.touches[0];
+    const now = Date.now();
+    if (now - lastHeartTime > 100) {
+        const sparkle = document.createElement('div');
+        sparkle.className = 'cursor-heart';
+        sparkle.textContent = ['✨', '💖', '⭐', '💕'][Math.floor(Math.random() * 4)];
+        sparkle.style.left = touch.pageX + 'px';
+        sparkle.style.top = touch.pageY + 'px';
+        heartsContainer.appendChild(sparkle);
+
+        setTimeout(() => sparkle.remove(), 1000);
+        lastHeartTime = now;
+    }
+});
+
+// Scroll-based sparkle effect for mobile
+let lastScrollY = 0;
+window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+    const scrollDelta = Math.abs(scrollY - lastScrollY);
+
+    if (scrollDelta > 30) {
+        // Create sparkles on scroll
+        for (let i = 0; i < 3; i++) {
+            setTimeout(() => {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'cursor-heart';
+                sparkle.textContent = ['✨', '💫', '⭐'][Math.floor(Math.random() * 3)];
+                sparkle.style.left = (Math.random() * window.innerWidth) + 'px';
+                sparkle.style.top = (scrollY + Math.random() * window.innerHeight * 0.5) + 'px';
+                heartsContainer.appendChild(sparkle);
+
+                setTimeout(() => sparkle.remove(), 1000);
+            }, i * 100);
+        }
+        lastScrollY = scrollY;
+    }
+});
+
+// ===== MOUSE GLOW EFFECT =====
+const glowCursor = document.createElement('div');
+glowCursor.className = 'glow-cursor';
+document.body.appendChild(glowCursor);
+
+document.addEventListener('mousemove', (e) => {
+    glowCursor.style.left = e.clientX + 'px';
+    glowCursor.style.top = e.clientY + 'px';
+});
+
