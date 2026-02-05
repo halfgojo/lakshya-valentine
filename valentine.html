@@ -6,17 +6,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Valentine 💖</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Dancing+Script:wght@700&display=swap"
+        rel="stylesheet">
     <!-- EmailJS for sending email notifications -->
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <!-- Canvas Confetti for celebration effect -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
 
 <body>
+    <!-- Background Music -->
+    <audio id="bgMusic" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Music Toggle Button -->
+    <button id="musicToggle" class="music-btn" onclick="toggleMusic()">🎵</button>
+
     <!-- Floating Particles -->
     <div id="particles"></div>
 
     <!-- Heart Trail Container -->
     <div id="hearts-container"></div>
+
+    <!-- Confetti Container -->
+    <div id="confetti-container"></div>
+
+    <!-- Valentine's Day Countdown -->
+    <div class="countdown-container" id="countdownContainer">
+        <h2>💕 Valentine's Day Countdown 💕</h2>
+        <div class="countdown">
+            <div class="countdown-item">
+                <span id="days">00</span>
+                <p>Days</p>
+            </div>
+            <div class="countdown-item">
+                <span id="hours">00</span>
+                <p>Hours</p>
+            </div>
+            <div class="countdown-item">
+                <span id="minutes">00</span>
+                <p>Minutes</p>
+            </div>
+            <div class="countdown-item">
+                <span id="seconds">00</span>
+                <p>Seconds</p>
+            </div>
+        </div>
+    </div>
 
     <!-- Main Container -->
     <div class="container" id="mainContainer">
@@ -31,6 +69,24 @@
     <!-- Success Content (Hidden Initially) -->
     <div class="success-container" id="successContainer" style="display: none;">
         <h1>Yay! Lakshya is so happy! ❤️🎉</h1>
+
+        <!-- Love Letter / Poem Section -->
+        <div class="detail-card poem-card">
+            <h2>💌 A Letter From My Heart</h2>
+            <div class="poem-content">
+                <p class="poem-text">
+                    "In a world full of faces, yours shines the brightest,<br>
+                    In the darkest of nights, you're my guiding light.<br>
+                    Every moment with you feels like a beautiful dream,<br>
+                    Together we flow, like a gentle stream.<br><br>
+                    Your smile melts my heart, your laugh fills my soul,<br>
+                    With you by my side, I finally feel whole.<br>
+                    This Valentine's Day, I promise you this—<br>
+                    A lifetime of love, sealed with a kiss. 💋"
+                </p>
+                <p class="poem-signature">— Forever Yours, Lakshya 💖</p>
+            </div>
+        </div>
 
         <!-- Photo Gallery -->
         <div class="detail-card photo-gallery-card">

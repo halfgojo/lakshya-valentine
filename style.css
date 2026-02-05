@@ -376,4 +376,131 @@ button {
     .detail-card h2 {
         font-size: 1.3rem;
     }
+
+    .countdown {
+        gap: 15px;
+    }
+
+    .countdown-item span {
+        font-size: 2rem;
+    }
+
+    .poem-text {
+        font-size: 1rem;
+    }
+}
+
+/* ===== COUNTDOWN TIMER ===== */
+.countdown-container {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 15px 30px;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 77, 148, 0.4);
+}
+
+.countdown-container h2 {
+    color: #ff4d94;
+    font-size: 1rem;
+    margin-bottom: 10px;
+}
+
+.countdown {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.countdown-item {
+    text-align: center;
+}
+
+.countdown-item span {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 0 0 20px rgba(255, 77, 148, 0.8);
+}
+
+.countdown-item p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.8rem;
+    margin-top: 5px;
+}
+
+/* ===== POEM / LOVE LETTER ===== */
+.poem-card {
+    background: linear-gradient(135deg, rgba(255, 77, 148, 0.2), rgba(255, 100, 100, 0.15));
+    border: 2px solid rgba(255, 77, 148, 0.5);
+}
+
+.poem-content {
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
+    margin-top: 15px;
+}
+
+.poem-text {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.3rem;
+    color: #fff;
+    line-height: 1.8;
+    text-align: center;
+}
+
+.poem-signature {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.4rem;
+    color: #ff4d94;
+    margin-top: 20px;
+    text-align: right;
+}
+
+/* ===== MUSIC TOGGLE BUTTON ===== */
+.music-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(255, 77, 148, 0.8);
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 20px rgba(255, 77, 148, 0.5);
+}
+
+.music-btn:hover {
+    transform: scale(1.1);
+    background: #ff4d94;
+}
+
+.music-btn.playing {
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 77, 148, 0.7);
+    }
+
+    50% {
+        box-shadow: 0 0 0 15px rgba(255, 77, 148, 0);
+    }
 }
