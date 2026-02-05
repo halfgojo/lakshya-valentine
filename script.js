@@ -49,6 +49,105 @@ function toggleMusic() {
     isPlaying = !isPlaying;
 }
 
+// ===== PARTICLE HEART ANIMATION =====
+const canvas = document.getElementById('heartCanvas');
+const ctx = canvas.getContext('2d');
+let heartParticles = [];
+let showHeart = false;
+
+function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+class HeartParticle {
+    constructor(x, y, targetX, targetY) {
+        this.x = x;
+        this.y = y;
+        this.targetX = targetX;
+        this.targetY = targetY;
+        this.size = Math.random() * 3 + 2;
+        this.speed = 0.02 + Math.random() * 0.03;
+        this.progress = 0;
+        this.color = `hsl(${340 + Math.random() * 30}, 100%, ${50 + Math.random() * 20}%)`;
+    }
+
+    update() {
+        this.progress += this.speed;
+        if (this.progress > 1) this.progress = 1;
+
+        this.x += (this.targetX - this.x) * this.speed * 2;
+        this.y += (this.targetY - this.y) * this.speed * 2;
+    }
+
+    draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fillStyle = this.color;
+        ctx.shadowBlur = 15;
+        ctx.shadowColor = this.color;
+        ctx.fill();
+    }
+}
+
+function createHeartShape() {
+    heartParticles = [];
+    const centerX = canvas.width / 2;
+    const centerY = canvas.height / 2;
+    const scale = Math.min(canvas.width, canvas.height) * 0.15;
+
+    for (let i = 0; i < 300; i++) {
+        const t = (i / 300) * Math.PI * 2;
+        // Heart parametric equations
+        const heartX = 16 * Math.pow(Math.sin(t), 3);
+        const heartY = -(13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t));
+
+        const targetX = centerX + heartX * scale / 16;
+        const targetY = centerY + heartY * scale / 16;
+
+        const startX = Math.random() * canvas.width;
+        const startY = Math.random() * canvas.height;
+
+        heartParticles.push(new HeartParticle(startX, startY, targetX, targetY));
+    }
+}
+
+function animateHeart() {
+    if (!showHeart) return;
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    heartParticles.forEach(p => {
+        p.update();
+        p.draw();
+    });
+
+    requestAnimationFrame(animateHeart);
+}
+
+function startHeartAnimation() {
+    showHeart = true;
+    createHeartShape();
+    animateHeart();
+
+    // Fade out after 3 seconds
+    setTimeout(() => {
+        const fadeOut = setInterval(() => {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            heartParticles.forEach(p => {
+                p.size *= 0.95;
+                if (p.size > 0.1) p.draw();
+            });
+            if (heartParticles[0].size < 0.1) {
+                clearInterval(fadeOut);
+                showHeart = false;
+            }
+        }, 50);
+    }, 3000);
+}
+
 // ===== CONFETTI CELEBRATION =====
 function launchConfetti() {
     const duration = 5 * 1000;
@@ -61,47 +160,35 @@ function launchConfetti() {
 
     const interval = setInterval(function () {
         const timeLeft = animationEnd - Date.now();
-
-        if (timeLeft <= 0) {
-            return clearInterval(interval);
-        }
+        if (timeLeft <= 0) return clearInterval(interval);
 
         const particleCount = 50 * (timeLeft / duration);
 
-        // Confetti from both sides
         confetti(Object.assign({}, defaults, {
             particleCount,
             origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
-            colors: ['#ff4d94', '#ff69b4', '#ff1493', '#ff6b6b', '#ffd700']
+            colors: ['#ff4d94', '#ff69b4', '#ff1493', '#ffd700', '#ff6b6b']
         }));
         confetti(Object.assign({}, defaults, {
             particleCount,
             origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
-            colors: ['#ff4d94', '#ff69b4', '#ff1493', '#ff6b6b', '#ffd700']
+            colors: ['#ff4d94', '#ff69b4', '#ff1493', '#ffd700', '#ff6b6b']
         }));
     }, 250);
-
-    // Also burst hearts
-    confetti({
-        particleCount: 100,
-        spread: 70,
-        origin: { y: 0.6 },
-        shapes: ['circle'],
-        colors: ['#ff4d94', '#ff69b4', '#e91e63']
-    });
 }
 
-// ===== FLOATING PARTICLES =====
+// ===== FLOATING PARTICLES (Sparkles) =====
 const particlesContainer = document.getElementById('particles');
-const colors = ['#ff4d94', '#4dffa6', '#4d9fff', '#ffeb4d', '#b84dff', '#ff4d4d'];
+const colors = ['#ff4d94', '#ff69b4', '#ffd700', '#fff', '#9b59b6'];
 
-for (let i = 0; i < 15; i++) {
+for (let i = 0; i < 25; i++) {
     const particle = document.createElement('div');
     particle.className = 'particle';
     particle.style.left = Math.random() * 100 + '%';
     particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+    particle.style.boxShadow = `0 0 10px ${particle.style.backgroundColor}`;
     particle.style.animationDelay = Math.random() * 18 + 's';
-    particle.style.animationDuration = (15 + Math.random() * 8) + 's';
+    particle.style.animationDuration = (12 + Math.random() * 10) + 's';
     particlesContainer.appendChild(particle);
 }
 
@@ -111,10 +198,10 @@ let lastHeartTime = 0;
 
 document.addEventListener('mousemove', (e) => {
     const now = Date.now();
-    if (now - lastHeartTime > 80) {
+    if (now - lastHeartTime > 60) {
         const heart = document.createElement('div');
         heart.className = 'cursor-heart';
-        heart.textContent = '💖';
+        heart.textContent = ['💖', '💕', '✨', '💗'][Math.floor(Math.random() * 4)];
         heart.style.left = e.pageX + 'px';
         heart.style.top = e.pageY + 'px';
         heartsContainer.appendChild(heart);
@@ -148,8 +235,9 @@ function moveNoButton() {
 
 // ===== YES BUTTON CLICK =====
 document.getElementById('yesBtn').addEventListener('click', () => {
-    // Launch confetti celebration!
+    // Launch confetti and heart animation!
     launchConfetti();
+    startHeartAnimation();
 
     // Hide countdown
     document.getElementById('countdownContainer').style.display = 'none';
@@ -189,7 +277,7 @@ function sendEmailNotification(personName) {
     }
 }
 
-// ===== DISTANCE CALCULATOR (Using Browser Location) =====
+// ===== DISTANCE CALCULATOR =====
 const lakshyaLocation = { lat: 22.7196, lng: 75.8577 };
 
 function calculateDistance() {

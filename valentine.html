@@ -7,7 +7,7 @@
     <title>Valentine 💖</title>
     <link rel="stylesheet" href="style.css">
     <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Dancing+Script:wght@700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Dancing+Script:wght@700&family=Playfair+Display:wght@400;700&display=swap"
         rel="stylesheet">
     <!-- EmailJS for sending email notifications -->
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
@@ -24,14 +24,22 @@
     <!-- Music Toggle Button -->
     <button id="musicToggle" class="music-btn" onclick="toggleMusic()">🎵</button>
 
+    <!-- Starry Night Background -->
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>
+
+    <!-- Moon -->
+    <div class="moon"></div>
+
     <!-- Floating Particles -->
     <div id="particles"></div>
 
     <!-- Heart Trail Container -->
     <div id="hearts-container"></div>
 
-    <!-- Confetti Container -->
-    <div id="confetti-container"></div>
+    <!-- Heart Particle Canvas -->
+    <canvas id="heartCanvas"></canvas>
 
     <!-- Valentine's Day Countdown -->
     <div class="countdown-container" id="countdownContainer">
@@ -58,17 +66,17 @@
 
     <!-- Main Container -->
     <div class="container" id="mainContainer">
-        <h1 id="nameText">Lakshya wants you to be his valentine? 💕</h1>
+        <h1 id="nameText" class="glow-text">Lakshya wants you to be his valentine? 💕</h1>
 
         <div class="buttons" id="buttonsDiv">
-            <button id="yesBtn">Yes 😍</button>
+            <button id="yesBtn" class="btn-glow">Yes 😍</button>
             <button id="noBtn">No 😏</button>
         </div>
     </div>
 
     <!-- Success Content (Hidden Initially) -->
     <div class="success-container" id="successContainer" style="display: none;">
-        <h1>Yay! Lakshya is so happy! ❤️🎉</h1>
+        <h1 class="glow-text">Yay! Lakshya is so happy! ❤️🎉</h1>
 
         <!-- Love Letter / Poem Section -->
         <div class="detail-card poem-card">
