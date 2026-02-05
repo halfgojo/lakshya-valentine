@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine 💖</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- EmailJS for sending email notifications -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+</head>
+
+<body>
+    <!-- Floating Particles -->
+    <div id="particles"></div>
+
+    <!-- Heart Trail Container -->
+    <div id="hearts-container"></div>
+
+    <!-- Main Container -->
+    <div class="container" id="mainContainer">
+        <h1 id="nameText">Lakshya wants you to be his valentine? 💕</h1>
+
+        <div class="buttons" id="buttonsDiv">
+            <button id="yesBtn">Yes 😍</button>
+            <button id="noBtn">No 😏</button>
+        </div>
+    </div>
+
+    <!-- Success Content (Hidden Initially) -->
+    <div class="success-container" id="successContainer" style="display: none;">
+        <h1>Yay! Lakshya is so happy! ❤️🎉</h1>
+
+        <!-- Photo Gallery -->
+        <div class="detail-card photo-gallery-card">
+            <h2>💕 This is Lakshya!</h2>
+            <div class="photo-gallery">
+                <img src="pic1.jpg" alt="Lakshya" class="gallery-img" onclick="this.classList.toggle('expanded')">
+                <img src="pic2.jpg" alt="Lakshya" class="gallery-img" onclick="this.classList.toggle('expanded')">
+                <img src="pic3.jpg" alt="Lakshya" class="gallery-img" onclick="this.classList.toggle('expanded')">
+                <img src="pic4.jpg" alt="Lakshya" class="gallery-img" onclick="this.classList.toggle('expanded')">
+            </div>
+        </div>
+
+        <div class="detail-card">
+            <h2>📍 Let's Meet Here!</h2>
+            <p class="location">E1/119 Chitrakoot, Vaishali Nagar</p>
+            <div class="map-container">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3679.8!2d75.78!3d22.73!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sVaishali%20Nagar%2C%20Indore!5e0!3m2!1sen!2sin!4v1620000000000!5m2!1sen!2sin"
+                    width="100%" height="250" style="border:0; border-radius: 15px;" allowfullscreen="" loading="lazy">
+                </iframe>
+            </div>
+        </div>
+
+        <div class="detail-card location-card">
+            <h2>📏 How Far Are You?</h2>
+            <p style="color: rgba(255,255,255,0.8); margin-bottom: 15px;">Click below to find out the distance between
+                us!</p>
+            <button onclick="calculateDistance()" class="calc-btn">📍 Find My Location</button>
+            <div id="distanceResult" class="distance-result" style="display: none;">
+                <div class="distance-value" id="distanceValue"></div>
+                <div class="distance-message" id="distanceMessage"></div>
+            </div>
+        </div>
+
+        <div class="detail-card">
+            <h2>☕ Nearby Cafés for Our Date</h2>
+            <div class="cafe-list">
+                <div class="cafe-item">🍰 Café Coffee Day • Crystal Mall • 0.5 km</div>
+                <div class="cafe-item">☕ The Chocolate Room • Gaurav Tower • 0.8 km</div>
+                <div class="cafe-item">🥤 Starbucks • Crystal Palm Mall • 1.2 km</div>
+                <div class="cafe-item">☕ Barista • Vaishali Circle • 0.6 km</div>
+                <div class="cafe-item">🍕 Café Mocha • Bhawarkua Road • 1.5 km</div>
+            </div>
+        </div>
+
+        <div class="detail-card">
+            <h2>💬 Let's Connect!</h2>
+            <a href="https://www.instagram.com/hiranandanilakshya2" target="_blank" class="instagram-btn">
+                📸 Follow me @hiranandanilakshya2
+            </a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">Made with 💖 by Lakshya</div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
